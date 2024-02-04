@@ -7,6 +7,7 @@
     <script src="tryscript.js" defer></script>
 </head>
 <body>
+    
     <div id="game" >
         <div id="matchlabel">Match the following</div>
         <canvas id="matchcanvas" width="900" height="900" style="position: fixed  ;"></canvas>
@@ -29,7 +30,7 @@
         </div>
     </div>
     <div id="exercise">
-        <form action = "" method = "get">
+        <form action = "" method = "get" onsubmit="event.preventDefault();">
         <p id="question" style="text-align: center;">Fill in the blanks</p>
     
         <div class="question">
@@ -57,14 +58,32 @@
         <div id="Submitcont" >
             <!-- <input id='submit' type="submit" value="Submit">
              -->
-             <button id='submit'onclick="checkAnswers()">Submit Answers</button>
+             <button id='submit'onclick="checkAnswers()" >Submit Answers</button>
         </div>
         </div>
+        
     </form>
         <!-- <button onclick="checkAnswers()">Submit Answers</button> -->
     </div>
     <div id="interact" data-score="" style="display: none;"></div>
     <div id="left"><b style="pointer-events: none;">&lt</b></div>
     <div id="right"><b style="pointer-events: none;">&gt</b></div>
+    <div id="username" >
+        Username
+        <form >
+            <input id="name" onkeydown="return /[a-z]/i.test(event.key)">
+        </form>
+        
+    </div>
+    <div id="start">Start Quiz</div>
+    <div id="final">
+    <div id="scoresheet">
+    </div>
+    <div id="score">
+    <form>
+        <input id="submit2" type="submit" value="Try Again" >
+    </form>
+    </div>
+    </div>
 </body>
 </html>
