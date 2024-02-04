@@ -8,7 +8,7 @@ const selectors={
 
 const state={ 
     dimension:4,
-    displaywindow:-1,
+    displaywindow:1,
     flippedCards: 0,
     matrix:null,
     unselected: "#282A3A",
@@ -150,12 +150,6 @@ const generateGame=()=>{
         }
     }
     console.log(others)
-    document.getElementById("First").style.display="none"
-    document.getElementById("game").style.display="none"
-    document.getElementById("exercise").style.display="none"
-    document.getElementById("right").style.display="none"
-    document.getElementById("left").style.display="none"
-    document.getElementById("final").style.display="none"
 
 }
 const decolor = card=>{
@@ -215,14 +209,6 @@ function checkAnswers() {
     var answer2 = parseInt(document.getElementById("answer2").value);
     var answer3 = parseInt(document.getElementById("answer3").value);
     var answer4 = parseInt(document.getElementById("answer4").value);
-    num1=Number(document.getElementById("num1").textContent) ;
-    num2=Number(document.getElementById("num2").textContent) ;
-    num3=Number(document.getElementById("num3").textContent) ;
-    num4=Number(document.getElementById("num4").textContent) ;
-    num5=Number(document.getElementById("num5").textContent) ;
-    num6=Number(document.getElementById("num6").textContent) ;
-    num7=Number(document.getElementById("num7").textContent) ;
-    num8=Number(document.getElementById("num8").textContent) ;
     let score3=0;
     if (answer1 === (num1 + num2) && answer2 === (num3 + num4) && answer3 === (num5 + num6) && answer4 === (num7 + num8)) {
         score3+=40;
@@ -255,19 +241,9 @@ function checkAnswers() {
         score3+=0;
     }
     state.score3=score3
-    console.log(state.score3)
     state.score=state.score1+state.score2+state.score3
     document.getElementById("interact").dataset.score=state.score
     console.log(state.score)
-    state.displaywindow=3
-    document.getElementById("final").style.display="block"
-    document.getElementById("right").style.display="none"
-    document.getElementById("left").style.display="none"
-    console.log("name:",document.getElementById("name").value)
-    document.getElementById("scoresheet").innerHTML=(document.getElementById("name").value).concat(", your score is ",state.score.toString() )
-    pagerefresh()
-    
-
 }
 const Selector= card=>{
     
@@ -307,13 +283,11 @@ const Selector= card=>{
             }
         }
         state.selectedCard=null
-        
-        
     }
 }
 const pagerefresh=()=>{
-    var disState=state.displaywindow
-    if(disState==0){
+    const disState=state.displaywindow
+    if(disState==2){
         document.getElementById("First").style.display="block"
     }
     else{
@@ -325,14 +299,13 @@ const pagerefresh=()=>{
     else{
         document.getElementById("game").style.display="none"
     }
-    if(disState==2){
+    if(disState==0){
         document.getElementById("exercise").style.display="block"
     }
     else{
         document.getElementById("exercise").style.display="none"
 
     }
-
 }
 
 const attachEventListeners = () => {
@@ -343,31 +316,22 @@ const attachEventListeners = () => {
         if (eventTarget.className.includes('card') ) {
             Selector(eventTarget)
             state.score=state.score1+state.score2+state.score3
-            document.getElementById("interact").dataset.score=state.score
+        document.getElementById("interact").dataset.score=state.score
             return
         } 
-        if(eventTarget.id=="start"){
-            document.getElementById("username").style.display="none"
-            document.getElementById("right").style.display="block"
-            document.getElementById("left").style.display="block"
-            document.getElementById("start").style.display="none"
-            state.displaywindow++
-            
-        }
         if(eventTarget.id=="right"){
             state.displaywindow=(state.displaywindow+1)%3
-            
         }
         if(eventTarget.id=="left"){
             if(state.displaywindow==0){
                 state.displaywindow=2
-                
             }
             else{
             state.displaywindow=(state.displaywindow-1)%3}
-            
         }
+        console.log(state.displaywindow)
         if (event.target.classList.contains('number-option')) {
+            console.log("khushika")
             var options = document.getElementsByClassName('number-option');
             for (var i = 0; i < options.length; i++) {
                 options[i].classList.remove('selected');
